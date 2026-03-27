@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { LayoutDashboard, Brain, SmilePlus, BookOpen, User, Phone, LogOut, Menu, X, Activity, FileText, Wind, Flower2, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { logout } from "@/lib/store";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navItems = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
