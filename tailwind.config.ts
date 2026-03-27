@@ -12,8 +12,19 @@ export default {
         "2xl": "1400px",
       },
     },
+    fontFamily: {
+      display: ['Playfair Display', 'serif'],
+      body: ['Plus Jakarta Sans', 'sans-serif'],
+    },
     extend: {
       colors: {
+        calm: {
+          blue: "hsl(var(--calm-blue))",
+          green: "hsl(var(--calm-green))",
+          lavender: "hsl(var(--calm-lavender))",
+          peach: "hsl(var(--calm-peach))",
+          rose: "hsl(var(--calm-rose))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
