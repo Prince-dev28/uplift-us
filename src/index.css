@@ -64,6 +64,60 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  .dark {
+    --background: 222 30% 10%;
+    --foreground: 220 20% 90%;
+
+    --card: 222 25% 14%;
+    --card-foreground: 220 20% 90%;
+
+    --popover: 222 25% 14%;
+    --popover-foreground: 220 20% 90%;
+
+    --primary: 234 62% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 168 42% 42%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 222 20% 20%;
+    --muted-foreground: 220 15% 60%;
+
+    --accent: 280 45% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 20% 22%;
+    --input: 222 20% 22%;
+    --ring: 234 62% 65%;
+
+    --calm-blue: 220 40% 18%;
+    --calm-green: 160 30% 16%;
+    --calm-lavender: 270 30% 18%;
+    --calm-peach: 20 40% 18%;
+    --calm-rose: 340 30% 18%;
+
+    --gradient-calm: linear-gradient(135deg, hsl(234 62% 50%), hsl(280 45% 55%));
+    --gradient-ocean: linear-gradient(135deg, hsl(200 60% 40%), hsl(168 42% 38%));
+    --gradient-sunset: linear-gradient(135deg, hsl(280 45% 55%), hsl(340 50% 50%));
+    --gradient-surface: linear-gradient(180deg, hsl(222 30% 10%), hsl(270 20% 12%));
+
+    --shadow-soft: 0 4px 20px -4px hsl(234 62% 30% / 0.3);
+    --shadow-card: 0 2px 12px -2px hsl(0 0% 0% / 0.3);
+    --shadow-elevated: 0 8px 30px -6px hsl(234 62% 30% / 0.4);
+
+    --sidebar-background: 222 25% 12%;
+    --sidebar-foreground: 220 20% 80%;
+    --sidebar-primary: 220 20% 90%;
+    --sidebar-primary-foreground: 222 25% 12%;
+    --sidebar-accent: 222 20% 18%;
+    --sidebar-accent-foreground: 220 20% 90%;
+    --sidebar-border: 222 20% 20%;
+    --sidebar-ring: 234 62% 65%;
+  }
 }
 
 @layer base {
