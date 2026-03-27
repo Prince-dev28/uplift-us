@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { LayoutDashboard, Brain, SmilePlus, BookOpen, User, Phone, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, Brain, SmilePlus, BookOpen, User, Phone, LogOut, Menu, X, Activity, FileText, Wind, Flower2, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { logout } from "@/lib/store";
 
@@ -9,6 +9,11 @@ const navItems = [
   { to: "/assessment", label: "Assessment", icon: Brain },
   { to: "/mood", label: "Mood Tracker", icon: SmilePlus },
   { to: "/journal", label: "Journal", icon: BookOpen },
+  { to: "/insights", label: "Insights", icon: Activity },
+  { to: "/weekly-report", label: "Weekly Report", icon: FileText },
+  { to: "/chat", label: "AI Chat", icon: MessageCircle },
+  { to: "/breathing", label: "Breathing", icon: Wind },
+  { to: "/meditation", label: "Meditation", icon: Flower2 },
   { to: "/profile", label: "Profile", icon: User },
   { to: "/emergency", label: "Emergency", icon: Phone },
 ];
@@ -26,21 +31,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen gradient-surface flex">
       {/* Desktop sidebar */}
-      <aside className="hidden lg:flex w-64 flex-col bg-card shadow-card border-r border-border p-6 fixed h-full z-30">
-        <Link to="/dashboard" className="flex items-center gap-2 mb-10">
+      <aside className="hidden lg:flex w-64 flex-col bg-card shadow-card border-r border-border p-6 fixed h-full z-30 overflow-y-auto">
+        <Link to="/dashboard" className="flex items-center gap-2 mb-8">
           <div className="w-10 h-10 rounded-xl gradient-calm flex items-center justify-center">
             <Brain className="w-5 h-5 text-primary-foreground" />
           </div>
           <span className="font-display text-xl font-bold text-foreground">MindCare</span>
         </Link>
-        <nav className="flex-1 space-y-1">
+        <nav className="flex-1 space-y-0.5">
           {navItems.map(item => {
             const active = location.pathname === item.to;
             return (
               <Link
                 key={item.to}
                 to={item.to}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   active ? "gradient-calm text-primary-foreground shadow-soft" : "text-muted-foreground hover:bg-muted"
                 }`}
               >
@@ -52,7 +57,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </nav>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all"
+          className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all mt-2"
         >
           <LogOut className="w-4 h-4" />
           Logout
@@ -78,7 +83,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           initial={{ opacity: 0, x: -200 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -200 }}
-          className="lg:hidden fixed inset-0 z-30 bg-card pt-16 p-6"
+          className="lg:hidden fixed inset-0 z-30 bg-card pt-16 p-6 overflow-y-auto"
         >
           <nav className="space-y-1">
             {navItems.map(item => {

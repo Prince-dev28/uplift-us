@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { User, Save, History } from "lucide-react";
-import { getProfile, setProfile, getAssessments } from "@/lib/store";
+import { User, Save, History, Camera } from "lucide-react";
+import { getProfile, setProfile, getAssessments, getProfilePic, setProfilePic } from "@/lib/store";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Profile() {
@@ -9,13 +9,29 @@ export default function Profile() {
   const [name, setName] = useState(p?.name || "");
   const [email, setEmail] = useState(p?.email || "");
   const [age, setAge] = useState(p?.age?.toString() || "");
+  const [profilePic, setProfilePicState] = useState<string | null>(getProfilePic());
   const assessments = getAssessments();
   const { toast } = useToast();
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const save = () => {
     if (!name || !email || !age) { toast({ title: "Please fill all fields", variant: "destructive" }); return; }
     setProfile({ name, email, age: parseInt(age) });
     toast({ title: "Profile updated! ✅" });
+  };
+
+  const handlePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) { toast({ title: "Image must be under 2MB", variant: "destructive" }); return; }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result as string;
+      setProfilePic(dataUrl);
+      setProfilePicState(dataUrl);
+      toast({ title: "Photo updated! 📸" });
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -25,8 +41,19 @@ export default function Profile() {
       </h1>
 
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-card rounded-2xl p-6 shadow-card border border-border">
-        <div className="w-16 h-16 rounded-full gradient-calm flex items-center justify-center mx-auto mb-6">
-          <span className="text-2xl font-bold text-primary-foreground">{name?.[0]?.toUpperCase() || "?"}</span>
+        {/* Profile Picture */}
+        <div className="relative w-20 h-20 mx-auto mb-6 group cursor-pointer" onClick={() => fileRef.current?.click()}>
+          {profilePic ? (
+            <img src={profilePic} alt="Profile" className="w-20 h-20 rounded-full object-cover border-2 border-border" />
+          ) : (
+            <div className="w-20 h-20 rounded-full gradient-calm flex items-center justify-center">
+              <span className="text-2xl font-bold text-primary-foreground">{name?.[0]?.toUpperCase() || "?"}</span>
+            </div>
+          )}
+          <div className="absolute inset-0 rounded-full bg-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <Camera className="w-5 h-5 text-background" />
+          </div>
+          <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handlePhoto} />
         </div>
 
         <div className="space-y-4">
