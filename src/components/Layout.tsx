@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { LayoutDashboard, Brain, SmilePlus, BookOpen, User, Phone, LogOut, Menu, X, Activity, FileText, Wind, Flower2, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { logout } from "@/lib/store";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navItems = [
   { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -55,13 +56,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             );
           })}
         </nav>
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all mt-2"
-        >
-          <LogOut className="w-4 h-4" />
-          Logout
-        </button>
+        <div className="mt-2 space-y-1">
+          <ThemeToggle />
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all w-full"
+          >
+            <LogOut className="w-4 h-4" />
+            Logout
+          </button>
+        </div>
       </aside>
 
       {/* Mobile header */}
@@ -102,6 +106,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </Link>
               );
             })}
+            <ThemeToggle />
             <button
               onClick={handleLogout}
               className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all w-full"
